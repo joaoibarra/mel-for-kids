@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/ic_ciano_background">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/whiteBoard"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/colorBackground"
+        app:layout_constraintBottom_toBottomOf="@+id/horizontalScrollview"
+        app:layout_constraintEnd_toEndOf="@+id/horizontalScrollview"
+        app:layout_constraintStart_toStartOf="@+id/horizontalScrollview"
+        app:layout_constraintTop_toTopOf="@+id/horizontalScrollview"/>
+
+    <ImageView
+        android:id="@+id/ivPolygonToDraw"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_margin="32dp"
+        android:adjustViewBounds="true"
+        app:srcCompat="@drawable/ic_calygraph_line"
+        app:layout_constraintBottom_toBottomOf="@+id/horizontalScrollview"
+        app:layout_constraintEnd_toEndOf="@+id/horizontalScrollview"
+        app:layout_constraintStart_toStartOf="@+id/horizontalScrollview"
+        app:layout_constraintTop_toTopOf="@+id/horizontalScrollview"/>
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scrollbars="none"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+            <com.ibarra.descobrindoaspalavras.ui.whiteboard.MyCanvasView
+                android:id="@+id/whiteBoardCanvas"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
+    </HorizontalScrollView>
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:max="100"
+        android:progress="0"
+        android:paddingBottom="16dp"
+        android:paddingStart="32dp"
+        android:paddingEnd="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:progressDrawable="@drawable/seek_bar"
+        android:thumb="@drawable/seek_thumb"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/guidelineMarginRight"
+        app:layout_constraintStart_toStartOf="@+id/guidelineMarginLeft"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/audio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:borderWidth="2dp"
+        app:srcCompat="@drawable/ic_audio"
+        android:backgroundTint="@color/colorBackground"
+        android:tint="@color/lightPink"
+        app:backgroundTint="@color/lightPink"
+        app:tint="@color/lightPink"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="32dp"/>
+
+    <Button
+        android:id="@+id/btnNext"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="16dp"
+        android:paddingTop="8dp"
+        app:icon="@drawable/ic_arrow_right"
+        app:elevation="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="0dp"
+        android:orientation="horizontal"
+        android:layout_height="1dp"
+        app:layout_constraintGuide_percent="0.8"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineMarginInnerLeft"
+        android:layout_width="1dp"
+        android:orientation="vertical"
+        android:layout_height="0dp"
+        app:layout_constraintGuide_percent="0.2"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineMarginInnerRight"
+        android:layout_width="1dp"
+        android:orientation="vertical"
+        android:layout_height="0dp"
+        app:layout_constraintGuide_percent="0.8"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline40"
+        android:layout_width="1dp"
+        android:orientation="vertical"
+        android:layout_height="0dp"
+        app:layout_constraintGuide_percent="0.4"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineMarginLeft"
+        android:layout_width="1dp"
+        android:orientation="vertical"
+        android:layout_height="0dp"
+        app:layout_constraintGuide_percent="0.15"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineMarginRight"
+        android:layout_width="1dp"
+        android:orientation="vertical"
+        android:layout_height="0dp"
+        app:layout_constraintGuide_percent="0.8"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

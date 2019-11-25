@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/ic_ciano_background">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/whiteBoard"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBackground"
+        android:layout_margin="16dp"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/audio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/whiteBoard"
+        app:layout_constraintTop_toTopOf="@+id/whiteBoard"
+        app:borderWidth="2dp"
+        app:srcCompat="@drawable/ic_audio"
+        android:backgroundTint="@color/colorBackground"
+        android:tint="@color/lightPink"
+        app:backgroundTint="@color/lightPink"
+        app:tint="@color/lightPink"
+        android:layout_margin="16dp"/>
+
+    <ImageView
+        android:id="@+id/ivPolygonToDraw"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_margin="32dp"
+        android:adjustViewBounds="true"
+        app:srcCompat="@drawable/ic_dotted_rectangle"
+        app:layout_constraintBottom_toBottomOf="@+id/whiteBoard"
+        app:layout_constraintEnd_toEndOf="@+id/whiteBoard"
+        app:layout_constraintStart_toStartOf="@+id/whiteBoard"
+        app:layout_constraintTop_toTopOf="@+id/whiteBoard"/>
+
+    <com.ibarra.descobrindoaspalavras.ui.tutorialboard.TutorialCanvasView
+        android:id="@+id/whiteBoardCanvas"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <Button
+        android:id="@+id/btnNext"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="16dp"
+        android:paddingTop="8dp"
+        app:icon="@drawable/ic_arrow_right"
+        app:elevation="2dp"
+        app:layout_constraintBottom_toBottomOf="@+id/whiteBoard"
+        app:layout_constraintEnd_toEndOf="@+id/whiteBoard" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

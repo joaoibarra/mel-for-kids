@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Descobrindo As Palavras</string>
+    <string name="step1_title">Titulo 1</string>
+    <string name="step1_description">Oi, eu sou a Mel, uma lobinha escoteira!</string>
+    <string name="step2_title">Titulo 2</string>
+    <string name="step2_description">Sou muito curiosa e aventureira. Gosto de sempre conhecer coisas novas.</string>
+    <string name="step_continue">Continuar</string>
+    <string name="rotate_your_screen">VIRE A TELA DO SEU CELULAR</string>
+    <string name="loading">Carregando</string>
+    <string name="lets_go_to_the_words">MUITO BOM!\nAgora vamos para as palavras!</string>
+    <string name="first_badge_tutorial">AMO MEUS MATERIAIS</string>
+    <string name="take_your_pen">PEGUE A SUA CANETA</string>
+    <string name="new_adventure">OBA! UMA AVENTURA!</string>
+    <string name="ready">ESTOU PRONTA!</string>
+</resources>
