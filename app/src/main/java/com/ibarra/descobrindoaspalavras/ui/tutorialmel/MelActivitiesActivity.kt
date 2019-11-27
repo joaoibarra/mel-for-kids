@@ -1,5 +1,7 @@
 package com.ibarra.descobrindoaspalavras.ui.tutorialmel
 
+import android.animation.ObjectAnimator
+import android.animation.PropertyValuesHolder
 import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -17,6 +19,8 @@ import java.util.*
 
 
 class MelActivitiesActivity: AppCompatActivity() {
+
+    var objAnim: ObjectAnimator? = null
 
     private var mediaPlayer: MediaPlayer? = null
 
@@ -36,11 +40,30 @@ class MelActivitiesActivity: AppCompatActivity() {
 
         mediaPlayer = MediaPlayer.create(this, R.raw.novo_desafio_5)
         mediaPlayer?.run { start() }
+
+        pulseAnimation()
     }
 
     override fun onPause() {
         super.onPause()
         mediaPlayer?.release()
+        stopPulseAnimation()
+    }
+
+    private fun pulseAnimation() {
+        objAnim = ObjectAnimator.ofPropertyValuesHolder(
+            map,
+            PropertyValuesHolder.ofFloat("scaleX", 1.2f),
+            PropertyValuesHolder.ofFloat("scaleY", 1.2f)
+        )
+        objAnim?.duration = 1000
+        objAnim?.repeatCount = ObjectAnimator.INFINITE
+        objAnim?.repeatMode = ObjectAnimator.REVERSE
+        objAnim?.start()
+    }
+
+    private fun stopPulseAnimation() {
+        objAnim?.cancel()
     }
 
 //        CoachMarkOverlay.Builder(this)

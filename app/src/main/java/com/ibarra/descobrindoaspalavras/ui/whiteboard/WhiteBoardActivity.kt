@@ -13,10 +13,15 @@ import android.util.Log
 import android.view.View
 import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.animation.doOnCancel
+import androidx.core.animation.doOnEnd
+import androidx.core.animation.doOnRepeat
+import androidx.core.animation.doOnStart
 import com.ibarra.descobrindoaspalavras.R
 import com.ibarra.descobrindoaspalavras.ui.congratulations.CongratulationsActivity
 import kotlinx.android.synthetic.main.white_board_activity.*
 import kotlinx.android.synthetic.main.white_board_activity.btnNext
+import kotlinx.coroutines.delay
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.FileOutputStream
@@ -53,6 +58,7 @@ class WhiteBoardActivity : AppCompatActivity() {
         when(step) {
             Step.FIRSTWORD -> {
                 pulseAnimation()
+
                 overlay.visibility = View.VISIBLE
                 mediaPlayer = MediaPlayer.create(this, R.raw.arraste_14)
                 mediaPlayer?.run { start() }
@@ -62,10 +68,12 @@ class WhiteBoardActivity : AppCompatActivity() {
                     if(overlay.visibility == View.VISIBLE) {
                         stopPulseAnimation()
                         overlay.visibility = View.GONE
+                        seekBar.progress = 0
                     }
 
                     if(step == Step.FIRSTWORD) {
                         mediaPlayer?.release()
+                        Thread.sleep(1000)
                         mediaPlayer = MediaPlayer.create(this@WhiteBoardActivity, R.raw.apontador_13)
                         mediaPlayer?.run { start() }
                     }
@@ -215,17 +223,23 @@ class WhiteBoardActivity : AppCompatActivity() {
     private fun pulseAnimation() {
         objAnim = ObjectAnimator.ofPropertyValuesHolder(
             seekBar,
-            PropertyValuesHolder.ofFloat("scaleX", 1.2f),
-            PropertyValuesHolder.ofFloat("scaleY", 1.2f)
+            PropertyValuesHolder.ofFloat("scaleX", 1.0f),
+            PropertyValuesHolder.ofFloat("scaleY", 1.0f)
         )
         objAnim?.duration = 500
         objAnim?.repeatCount = ObjectAnimator.INFINITE
         objAnim?.repeatMode = ObjectAnimator.REVERSE
         objAnim?.start()
+
+//        objAnim?.addUpdateListener {
+//            if((it.currentPlayTime % 100).toInt()==0) {
+//                seekBar.progress = (it.currentPlayTime / 100).toInt()
+//            }
+//        }
     }
 
     private fun stopPulseAnimation() {
-        objAnim?.cancel();
+        objAnim?.cancel()
     }
 
 }
