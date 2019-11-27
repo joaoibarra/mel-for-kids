@@ -3,6 +3,7 @@ package com.ibarra.descobrindoaspalavras.ui.tutorialboard
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
@@ -20,6 +21,10 @@ import java.io.IOException
 
 class TutorialBoardActivity : AppCompatActivity() {
 
+    private var mediaPlayer: MediaPlayer? = null
+
+    var polygon: Polygon? = null
+
     var currentProgress = 0
 
     companion object {
@@ -35,17 +40,43 @@ class TutorialBoardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.tutorial_board_activity)
 
-        val polygon = intent.extras?.get(POLYGON) as Polygon?
+        polygon = intent.extras?.get(POLYGON) as Polygon?
 
         when(polygon) {
             Polygon.RECTANGLE -> {
                 Glide.with(this).load(R.drawable.ic_dotted_rectangle).into(ivPolygonToDraw)
+                mediaPlayer = MediaPlayer.create(this, R.raw.quadrado_8)
+                mediaPlayer?.run { start() }
             }
             Polygon.CIRCLE -> {
                 Glide.with(this).load(R.drawable.ic_circle_stroke).into(ivPolygonToDraw)
+                mediaPlayer = MediaPlayer.create(this, R.raw.circulo_9)
+                mediaPlayer?.run { start() }
             }
             Polygon.HEXAGON -> {
                 Glide.with(this).load(R.drawable.ic_hexagon_stroke).into(ivPolygonToDraw)
+                mediaPlayer = MediaPlayer.create(this, R.raw.hexagono_10)
+                mediaPlayer?.run { start() }
+            }
+        }
+
+        audio.setOnClickListener {
+            when(polygon) {
+                Polygon.RECTANGLE -> {
+                    mediaPlayer?.release()
+                    mediaPlayer = MediaPlayer.create(this, R.raw.quadrado_8)
+                    mediaPlayer?.run { start() }
+                }
+                Polygon.CIRCLE -> {
+                    mediaPlayer?.release()
+                    mediaPlayer = MediaPlayer.create(this, R.raw.circulo_9)
+                    mediaPlayer?.run { start() }
+                }
+                Polygon.HEXAGON -> {
+                    mediaPlayer?.release()
+                    mediaPlayer = MediaPlayer.create(this, R.raw.hexagono_10)
+                    mediaPlayer?.run { start() }
+                }
             }
         }
 
@@ -108,6 +139,11 @@ class TutorialBoardActivity : AppCompatActivity() {
             e.printStackTrace()
         }
 
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mediaPlayer?.release()
     }
 
 }

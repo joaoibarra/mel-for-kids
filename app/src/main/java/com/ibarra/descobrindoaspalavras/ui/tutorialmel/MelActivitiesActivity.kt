@@ -1,6 +1,7 @@
 package com.ibarra.descobrindoaspalavras.ui.tutorialmel
 
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import androidx.appcompat.app.AppCompatActivity
@@ -17,7 +18,7 @@ import java.util.*
 
 class MelActivitiesActivity: AppCompatActivity() {
 
-
+    private var mediaPlayer: MediaPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,8 +33,14 @@ class MelActivitiesActivity: AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-        val audio = AudioUtil(this, true)
-        audio.speakOut("oi amiguinho como vai você")
+
+        mediaPlayer = MediaPlayer.create(this, R.raw.novo_desafio_5)
+        mediaPlayer?.run { start() }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mediaPlayer?.release()
     }
 
 //        CoachMarkOverlay.Builder(this)

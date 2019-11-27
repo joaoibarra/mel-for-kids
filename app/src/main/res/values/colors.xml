@@ -10,6 +10,7 @@
     <color name="seek_bar_progress">#ffb600</color>
     <color name="seek_bar_secondary_progress">#3399CC</color>
     <color name="transparent">#00000000</color>
+    <color name="overlay">#80000000</color>
 
     <color name="darkYellow">#F3C568</color>
     <color name="darkBlue">#79A2DE</color>

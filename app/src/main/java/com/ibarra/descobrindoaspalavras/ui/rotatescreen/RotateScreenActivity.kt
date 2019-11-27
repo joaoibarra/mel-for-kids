@@ -2,6 +2,7 @@ package com.ibarra.descobrindoaspalavras.ui.rotatescreen
 
 import android.content.Intent
 import android.hardware.SensorManager
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.OrientationEventListener
 import androidx.appcompat.app.AppCompatActivity
@@ -16,11 +17,16 @@ class RotateScreenActivity: AppCompatActivity() {
 
     private var isLandscape = false
 
+    private var mediaPlayer: MediaPlayer? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.rotate_screen_activity)
 
         addOrientationListener()
+
+        mediaPlayer = MediaPlayer.create(this, R.raw.vire_a_tela_3)
+        mediaPlayer?.run { start() }
     }
 
     private fun addOrientationListener() {
@@ -45,6 +51,7 @@ class RotateScreenActivity: AppCompatActivity() {
     }
 
     fun startMelTutorialBoard() {
+        mediaPlayer?.release()
         val intent = Intent(this, MelAreaActivity::class.java)
         startActivity(intent)
         finish()
@@ -54,5 +61,10 @@ class RotateScreenActivity: AppCompatActivity() {
         val intent = Intent(this, OnboardingTutorialWhiteboardActivity::class.java)
         startActivity(intent)
         finish()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mediaPlayer?.release()
     }
 }

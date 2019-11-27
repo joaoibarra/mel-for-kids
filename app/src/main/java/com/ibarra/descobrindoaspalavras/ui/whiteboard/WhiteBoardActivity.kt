@@ -1,25 +1,39 @@
 package com.ibarra.descobrindoaspalavras.ui.whiteboard
 
+import android.animation.ObjectAnimator
+import android.animation.PropertyValuesHolder
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.media.MediaPlayer
+import android.media.MediaPlayer.OnCompletionListener
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
+import android.view.View
 import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
 import com.ibarra.descobrindoaspalavras.R
 import com.ibarra.descobrindoaspalavras.ui.congratulations.CongratulationsActivity
 import kotlinx.android.synthetic.main.white_board_activity.*
+import kotlinx.android.synthetic.main.white_board_activity.btnNext
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.FileOutputStream
 import java.io.IOException
 
 
+
+
 class WhiteBoardActivity : AppCompatActivity() {
 
+    var objAnim: ObjectAnimator? = null
+
+    private var mediaPlayer: MediaPlayer? = null
+
     var currentProgress = 0
+
+    var step: Step? = null
 
     companion object {
         private const val STEP = "step"
@@ -34,18 +48,74 @@ class WhiteBoardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.white_board_activity)
 
-        val step = intent.extras?.get(STEP) as Step?
+        step = intent.extras?.get(STEP) as Step?
 
         when(step) {
             Step.FIRSTWORD -> {
+                pulseAnimation()
+                overlay.visibility = View.VISIBLE
+                mediaPlayer = MediaPlayer.create(this, R.raw.arraste_14)
+                mediaPlayer?.run { start() }
+
+                mediaPlayer?.setOnCompletionListener {
+                    mediaPlayer?.run { release() }
+                    if(overlay.visibility == View.VISIBLE) {
+                        stopPulseAnimation()
+                        overlay.visibility = View.GONE
+                    }
+
+                    if(step == Step.FIRSTWORD) {
+                        mediaPlayer?.release()
+                        mediaPlayer = MediaPlayer.create(this@WhiteBoardActivity, R.raw.apontador_13)
+                        mediaPlayer?.run { start() }
+                    }
+                }
             }
             Step.SECONDWORD -> {
+                mediaPlayer = MediaPlayer.create(this, R.raw.cadernos_16)
+                mediaPlayer?.run { start() }
             }
             Step.THIRDWORD -> {
+                mediaPlayer = MediaPlayer.create(this, R.raw.regua_18)
+                mediaPlayer?.run { start() }
             }
             Step.FOURTHWORD -> {
+                mediaPlayer = MediaPlayer.create(this, R.raw.giz_20)
+                mediaPlayer?.run { start() }
             }
             Step.PHRASE -> {
+                mediaPlayer = MediaPlayer.create(this, R.raw.frase_23)
+                mediaPlayer?.run { start() }
+            }
+        }
+
+        audio.setOnClickListener {
+            when(step) {
+                Step.FIRSTWORD -> {
+                    mediaPlayer?.release()
+                    mediaPlayer = MediaPlayer.create(this, R.raw.apontador_13)
+                    mediaPlayer?.run { start() }
+                }
+                Step.SECONDWORD -> {
+                    mediaPlayer?.release()
+                    mediaPlayer = MediaPlayer.create(this, R.raw.cadernos_16)
+                    mediaPlayer?.run { start() }
+                }
+                Step.THIRDWORD -> {
+                    mediaPlayer?.release()
+                    mediaPlayer = MediaPlayer.create(this, R.raw.regua_18)
+                    mediaPlayer?.run { start() }
+                }
+                Step.FOURTHWORD -> {
+                    mediaPlayer?.release()
+                    mediaPlayer = MediaPlayer.create(this, R.raw.giz_20)
+                    mediaPlayer?.run { start() }
+                }
+                Step.PHRASE -> {
+                    mediaPlayer?.release()
+                    mediaPlayer = MediaPlayer.create(this, R.raw.frase_23)
+                    mediaPlayer?.run { start() }
+                }
             }
         }
 
@@ -135,6 +205,27 @@ class WhiteBoardActivity : AppCompatActivity() {
             e.printStackTrace()
         }
 
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mediaPlayer?.release()
+    }
+
+    private fun pulseAnimation() {
+        objAnim = ObjectAnimator.ofPropertyValuesHolder(
+            seekBar,
+            PropertyValuesHolder.ofFloat("scaleX", 1.2f),
+            PropertyValuesHolder.ofFloat("scaleY", 1.2f)
+        )
+        objAnim?.duration = 500
+        objAnim?.repeatCount = ObjectAnimator.INFINITE
+        objAnim?.repeatMode = ObjectAnimator.REVERSE
+        objAnim?.start()
+    }
+
+    private fun stopPulseAnimation() {
+        objAnim?.cancel();
     }
 
 }

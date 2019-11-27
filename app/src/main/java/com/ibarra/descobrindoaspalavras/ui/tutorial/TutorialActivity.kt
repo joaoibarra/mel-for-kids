@@ -24,12 +24,12 @@ class TutorialActivity : AppCompatActivity() {
                 R.drawable.ic_tutorial_mel_1,
                 getString(R.string.step1_title),
                 getString(R.string.step1_description),
-                getString(R.string.step1_title))
+                R.raw.oi_1)
             1 -> changeFragment(
                 R.drawable.ic_jumping_mel,
                 getString(R.string.step2_title),
                 getString(R.string.step2_description),
-                getString(R.string.step1_title))
+                R.raw.oi_2)
             2 -> {
                 val intent = Intent(this, RotateScreenActivity::class.java)
                 startActivity(intent)
@@ -41,7 +41,7 @@ class TutorialActivity : AppCompatActivity() {
     private fun changeFragment(imageId: Int,
                        title: String,
                        description: String,
-                       audio: String) {
+                       audio: Int) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.container, TutorialFragment.newInstance(imageId, title, description, audio))
             .commitNow()

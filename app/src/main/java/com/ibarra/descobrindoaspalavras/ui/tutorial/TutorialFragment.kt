@@ -1,5 +1,6 @@
 package com.ibarra.descobrindoaspalavras.ui.tutorial
 
+import android.media.MediaPlayer
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,18 +14,20 @@ import kotlinx.android.synthetic.main.main_fragment.*
 class TutorialFragment(val imageId: Int,
                        val title: String,
                        val description: String,
-                       val audio: String) : Fragment() {
+                       val audio: Int) : Fragment() {
 
     companion object {
         fun newInstance(imageId: Int,
                                        title: String,
                                        description: String,
-                                       audio: String): Fragment {
+                                       audio: Int): Fragment {
             return TutorialFragment(imageId, title, description, audio)
         }
     }
 
     private lateinit var viewModel: MainViewModel
+
+    private var mediaPlayer: MediaPlayer? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,6 +49,13 @@ class TutorialFragment(val imageId: Int,
         btnNext.setOnClickListener {
             (activity as TutorialActivity).setFragment()
         }
+
+        mediaPlayer = MediaPlayer.create(context, audio)
+        mediaPlayer?.run { start() }
     }
 
+    override fun onPause() {
+        super.onPause()
+        mediaPlayer?.release()
+    }
 }

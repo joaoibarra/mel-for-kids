@@ -1,6 +1,6 @@
 package com.ibarra.descobrindoaspalavras.ui.whiteboard
 
-import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
@@ -9,6 +9,8 @@ import kotlinx.android.synthetic.main.onboarding_tutorial_whiteboard_activity.*
 
 
 class OnboardingPhraseActivity: AppCompatActivity() {
+
+    private var mediaPlayer: MediaPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,10 +21,18 @@ class OnboardingPhraseActivity: AppCompatActivity() {
         btnNext.setOnClickListener {
             startOnboardingPen()
         }
+
+        mediaPlayer = MediaPlayer.create(this, R.raw.frase_preparacao_22)
+        mediaPlayer?.run { start() }
     }
 
     fun startOnboardingPen() {
         startActivity(WhiteBoardActivity.start(this, Step.PHRASE))
         finish()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mediaPlayer?.release()
     }
 }
