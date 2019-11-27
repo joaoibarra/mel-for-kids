@@ -223,8 +223,8 @@ class WhiteBoardActivity : AppCompatActivity() {
     private fun pulseAnimation() {
         objAnim = ObjectAnimator.ofPropertyValuesHolder(
             seekBar,
-            PropertyValuesHolder.ofFloat("scaleX", 1.0f),
-            PropertyValuesHolder.ofFloat("scaleY", 1.0f)
+            PropertyValuesHolder.ofFloat("scaleX", 1.1f),
+            PropertyValuesHolder.ofFloat("scaleY", 1.1f)
         )
         objAnim?.duration = 500
         objAnim?.repeatCount = ObjectAnimator.INFINITE
