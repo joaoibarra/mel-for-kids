@@ -35,4 +35,8 @@ class OnboardingPhraseActivity: AppCompatActivity() {
         super.onPause()
         mediaPlayer?.release()
     }
+
+    override fun onBackPressed() {
+
+    }
 }

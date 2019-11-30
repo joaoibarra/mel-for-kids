@@ -146,4 +146,7 @@ class TutorialBoardActivity : AppCompatActivity() {
         mediaPlayer?.release()
     }
 
+    override fun onBackPressed() {
+
+    }
 }

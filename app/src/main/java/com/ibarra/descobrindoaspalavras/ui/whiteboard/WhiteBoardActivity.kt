@@ -242,4 +242,8 @@ class WhiteBoardActivity : AppCompatActivity() {
         objAnim?.cancel()
     }
 
+    override fun onBackPressed() {
+
+    }
+
 }

@@ -15,4 +15,8 @@ class BadgeAreaActivity : AppCompatActivity() {
             finish()
         }
     }
+
+    override fun onBackPressed() {
+
+    }
 }

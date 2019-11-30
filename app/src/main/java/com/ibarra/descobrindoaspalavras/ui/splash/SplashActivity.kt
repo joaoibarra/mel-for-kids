@@ -38,4 +38,8 @@ class SplashActivity: AppCompatActivity() {
 
         super.onDestroy()
     }
+
+    override fun onBackPressed() {
+
+    }
 }

@@ -29,4 +29,8 @@ class PreWhiteBoardStep2Activity: AppCompatActivity() {
         super.onPause()
         mediaPlayer?.release()
     }
+
+    override fun onBackPressed() {
+
+    }
 }

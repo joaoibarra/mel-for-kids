@@ -48,4 +48,7 @@ class TutorialActivity : AppCompatActivity() {
         step++
     }
 
+    override fun onBackPressed() {
+
+    }
 }

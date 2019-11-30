@@ -29,4 +29,8 @@ class PrizeUnlockedActivity: AppCompatActivity() {
         super.onPause()
         mediaPlayer?.release()
     }
+
+    override fun onBackPressed() {
+
+    }
 }

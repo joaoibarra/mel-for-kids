@@ -66,6 +66,10 @@ class MelActivitiesActivity: AppCompatActivity() {
         objAnim?.cancel()
     }
 
+    override fun onBackPressed() {
+
+    }
+
 //        CoachMarkOverlay.Builder(this)
 //            .setOverlayTargetView(melArea)
 //            .setInfoViewBuilder(

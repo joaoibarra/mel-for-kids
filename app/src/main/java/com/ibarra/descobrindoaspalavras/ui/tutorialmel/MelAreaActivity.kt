@@ -88,6 +88,10 @@ class MelAreaActivity: AppCompatActivity() {
     }
 
     private fun stopPulseAnimation() {
-        objAnim?.cancel();
+        objAnim?.cancel()
+    }
+
+    override fun onBackPressed() {
+
     }
 }

@@ -97,4 +97,8 @@ class CongratulationsActivity: AppCompatActivity() {
         super.onPause()
         mediaPlayer?.release()
     }
+
+    override fun onBackPressed() {
+
+    }
 }
